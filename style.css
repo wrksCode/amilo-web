@@ -1,0 +1,12 @@
+body {
+    background-color: darkslategrey;
+    color: azure;
+}
+nav {
+    color: darkcyan;
+    text-decoration: none;
+}
+a {
+    text-decoration: none !important;
+    color: darkcyan !important;
+}
