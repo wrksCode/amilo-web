@@ -1,12 +1,56 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 body {
-    background-color: darkslategrey;
-    color: azure;
+    background-color: darkgrey !important; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+.content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+footer {
+    flex-shrink: 0;
+    width: 100%;
+    background-color: #092a4a;
+    padding: 10px 0;
+    text-align: center;
 }
 nav {
     color: darkcyan;
     text-decoration: none;
+    margin: 2em;
 }
+
 a {
     text-decoration: none !important;
     color: darkcyan !important;
+}
+
+span {
+    color: darkcyan !important;
+}
+
+h3 {
+    margin-top: 30px; /* Add space on top of h3 */
+    margin-bottom: 15px; /* Add space between h3 and the next element */
+}
+
+h5 {
+    margin-top: 15px; /* Add space between h5 and the previous element */
+    margin-bottom: 15px; /* Add space between h5 and the next element */
+}
+li {
+    list-style-type: none;
 }
