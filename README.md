@@ -1,4 +1,4 @@
-## ailo.cloud sites src
+## amilo.cloud sites src
 
 #### link: https://amilo.cloud
 
