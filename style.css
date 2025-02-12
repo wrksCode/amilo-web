@@ -2,8 +2,7 @@ body {
     background-color: white;
 }
 
-.main-content{
-    align-content: center;
+.main-content {
     text-align: center;
     margin-bottom: 50px;
 }
@@ -13,18 +12,54 @@ body {
     margin-top: 20px;
     margin-bottom: 5px;
 }
+
 footer {
-    align-content: center;
     text-align: center;
 }
+
 footer img {
     max-width: 300px;
     margin-bottom: 0px;
 }
 
 a {
-    align-content: center;
-    text-align: center;
     text-decoration: none;
-    color:darkslategrey;
+    color: darkslategrey;
+    font-size: larger;
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    padding: 5px;
+}
+
+a:hover {
+    color: darkblue;
+    transform: scale(1.2);
+}
+
+li {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+
+li:before {
+    content: "|";
+    margin-right: 5px;
+    color: darkslategrey;
+    transition: transform 0.3s ease;
+}
+a:hover + li:before {
+    transform: translateX(-5px); /* Move the bracket to the left when hovering */
+}
+li::after {
+    content: "|";
+    margin-left: 5px;
+    color: darkslategrey;
+    transition: transform 0.3s ease;
+}
+a:hover + li:after {
+    transform: translateX(5px); /* Move the bracket to the right when hovering */
 }
