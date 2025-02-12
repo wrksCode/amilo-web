@@ -5,11 +5,13 @@ body {
 .main-content{
     align-content: center;
     text-align: center;
+    margin-bottom: 50px;
 }
 
 .main-content img {
     max-width: 350px;
     margin-top: 20px;
+    margin-bottom: 5px;
 }
 footer {
     align-content: center;
@@ -18,4 +20,11 @@ footer {
 footer img {
     max-width: 300px;
     margin-bottom: 0px;
+}
+
+a {
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    color:darkslategrey;
 }
