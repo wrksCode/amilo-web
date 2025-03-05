@@ -1,5 +1,7 @@
 body {
-    background-color: white;
+    background-color: #fffffff0;
+    display: flex;
+    flex-direction: column;
 }
 
 .main-content {
@@ -18,8 +20,9 @@ footer {
 }
 
 footer img {
-    max-width: 300px;
+    max-width: auto;
     margin-bottom: 0px;
+
 }
 
 a {
