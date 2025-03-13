@@ -97,7 +97,7 @@ li:hover a {
     overflow: hidden;
     white-space: nowrap;
     width: 0;
-    animation: typing 5s steps(50) forwards;
+    animation: typing 2s steps(50) forwards;
 }
 
 @keyframes typing {
