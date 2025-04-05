@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeDrive Scraper</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        code { background-color: #f4f4f4; padding: 5px; font-size: 1em; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+        .language { margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+<div>
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('hu')">Magyar</button>
+</div>
+
+<div id="en" class="language">
+    <h1>AnimeDrive Scraper – A Simple Rust Web Scraper for Anime Links</h1>
+    <p>Web scraping is a powerful tool for extracting data from websites. In this article, we'll explore how easy it is to scrape content using a simple Rust program. Our example will focus on scraping <a href="https://animedrive.hu/">AnimeDrive.hu</a> for direct video links, but the same principles can apply to various websites.</p>
+    <p><strong>⚠️ Legal Disclaimer:</strong> This code is <em>for educational purposes only</em>. The legality of scraping AnimeDrive is uncertain, and scraping may violate their terms of service. Use this code <em>at your own risk</em>!</p>
+    <p>You can even combine this scraper with the <a href="https://docs.anilist.co" target="_blank">Anilist API</a> to automatically track and search for anime episodes. Once you know the anime's Anilist ID, the API can convert it a MyAnimeList ID and use that for scraping.</p>
+
+    <h3>🧠 What Does This Program Do?</h3>
+    <p>The program follows these steps:</p>
+    <ul>
+        <li>Retrieves the anime's AnimeDrive ID based on the MyAnimeList ID.</li>
+        <li>Constructs the video player link.</li>
+        <li>Loads the video player HTML page.</li>
+        <li>Extracts the highest quality video link.</li>
+        <li>Saves it to <code>video_link.txt</code>.</li>
+    </ul>
+
+    <h3>⚙️ Dependencies</h3>
+    <p>You'll need the following crates for this program:</p>
+    <pre><code>
+# Cargo.toml
+[dependencies]
+reqwest = { version = "0.11", features = ["blocking"] }
+regex = "1.7"
+    </code></pre>
+
+    <h3>📦 Build and Run</h3>
+    <ol>
+        <li>Clone or copy the code into a new Rust project.</li>
+        <li>Add the dependencies to <code>Cargo.toml</code>.</li>
+        <li>Build and run the project with:</li>
+    </ol>
+    <pre><code>cargo run</code></pre>
+    <p>The output will be saved in <code>video_link.txt</code>, containing the direct video URL.</p>
+
+    <h3>💡 Example</h3>
+    <p>By default, the program fetches episode 8 of <em>Sousou no Frieren</em> (MAL ID: <code>52991</code>). It automatically retrieves, loads, and processes the episode for you.</p>
+
+    <h3>🔍 How It Works</h3>
+
+    <h4>1. Retrieve AnimeDrive ID</h4>
+    <p>We start by searching AnimeDrive with the MyAnimeList link:</p>
+    <pre><code>
+let search_url = format!("https://animedrive.hu/search/?q=https://myanimelist.net/anime/{}", mal_id);
+    </code></pre>
+
+    <h4>2. Fetch Player Page</h4>
+    <p>Once we have the ID, we construct the player page URL:</p>
+    <pre><code>
+let url = format!("https://player.animedrive.hu/player_wee.php?id={}&amp;ep={}", id, episode);
+    </code></pre>
+
+    <h4>3. Extract HTML</h4>
+    <p>The entire HTML page is fetched, and you can save it for debugging:</p>
+    <pre><code>
+let response_html = get_html(&client, anime_drive_link);
+    </code></pre>
+
+    <h4>4. Extract Video Link with Regex</h4>
+    <p>We use regex to find the highest quality video link from the JavaScript code in the HTML:</p>
+    <pre><code>
+let re = Regex::new(r#"src:\s*'([^']+)'.*?size:\s*(\d+)"#).unwrap();
+    </code></pre>
+
+    <h3>📁 Output Files</h3>
+    <ul>
+        <li><code>video_link.txt</code> – Contains the video URL.</li>
+        <li><code>response.html</code> – The full HTML of the player page (for debugging).</li>
+    </ul>
+</div>
+
+<div id="hu" class="language">
+    <h1>AnimeDrive Scraper – Videó link kinyerő</h1>
+    <p>A web scraping egy nagyszerű eszköz az adatok kinyerésére weboldalakról. Ebben a cikkben bemutatjuk, mennyire egyszerű scraping-et végezni egy alap Rust programmal. A példa az <a href="https://animedrive.hu/">AnimeDrive.hu</a> oldalról való videó linkek kinyerésére összpontosít, de ugyanazok az elvek más weboldalakra is alkalmazhatóak.</p>
+    <p><strong>⚠️ Jogi Nyilatkozat:</strong> Ez a kód <em>csak oktatási célból</em> készült. Az AnimeDrive oldal jogi státusza nem tisztázott, és a scraping megsértheti a szolgáltatási feltételeiket. Használata <em>saját felelősségre történik</em>!</p>
+    <p>A scraper-t akár kombinálhatod az <a href="https://docs.anilist.co" target="_blank">Anilist API-val</a>, hogy automatikusan kövesd és keresd az anime epizódokat. Ha már tudod az anime Anilist ID-ját, az API segítségével könnyedén konvertálhatod MyAnimeList ID-ra.</p>
+
+    <h3>🧠 Mit Csinál A Program?</h3>
+    <p>A program a következő lépéseket hajtja végre:</p>
+    <ul>
+        <li>Az anime MyAnimeList ID-ját és epizód számát veszi.</li>
+        <li>Lekéri a megfelelő AnimeDrive ID-t.</li>
+        <li>Felépíti a videólejátszó linket.</li>
+        <li>Betölti a videólejátszó HTML oldalt.</li>
+        <li>Kinyeri a legjobb minőségű videó linket.</li>
+        <li>Elmenti a <code>video_link.txt</code> fájlba.</li>
+    </ul>
+
+    <h3>⚙️ Függőségek</h3>
+    <p>A kód működéséhez az alábbi crate-ek szükségesek:</p>
+    <pre><code>
+# Cargo.toml
+[dependencies]
+reqwest = { version = "0.11", features = ["blocking"] }
+regex = "1.7"
+    </code></pre>
+
+    <h3>📦 Build és Futtatás</h3>
+    <ol>
+        <li>Klónozd vagy másold le a kódot egy Rust projektbe.</li>
+        <li>Add hozzá a szükséges függőségeket a <code>Cargo.toml</code>hoz.</li>
+        <li>Buildeld és futtasd:</li>
+    </ol>
+    <pre><code>cargo run</code></pre>
+    <p>A kimenet a <code>video_link.txt</code> fájlban lesz, amely tartalmazza a videó közvetlen URL-jét.</p>
+
+    <h3>💡 Példa</h3>
+    <p>A kódban alapértelmezetten a *Sousou no Frieren* (MAL ID: <code>52991</code>) 8. epizódja van beállítva. Ez a rész automatikusan megkeresésre, betöltésre és feldolgozásra kerül.</p>
+
+    <h3>🔍 Hogyan Működik?</h3>
+
+    <h4>1. AnimeDrive ID Lekérése</h4>
+    <p>A MyAnimeList link alapján keresünk az AnimeDrive-on:</p>
+    <pre><code>
+let search_url = format!("https://animedrive.hu/search/?q=https://myanimelist.net/anime/{}", mal_id);
+    </code></pre>
+
+    <h4>2. Player Oldal Lekérése</h4>
+    <p>Miután megvan az ID, generáljuk a lejátszó oldal linkjét:</p>
+    <pre><code>
+let url = format!("https://player.animedrive.hu/player_wee.php?id={}&amp;ep={}", id, episode);
+    </code></pre>
+
+    <h4>3. HTML Kinyerés</h4>
+    <p>A teljes HTML oldalt letöltjük, és elmenthetjük a hibakereséshez:</p>
+    <pre><code>
+let response_html = get_html(&client, anime_drive_link);
+    </code></pre>
+
+    <h4>4. Videó Link Kinyerése Regex-szel</h4>
+    <p>A JavaScript kódból regex-szel kinyerjük a legjobb minőségű videó linket:</p>
+    <pre><code>
+let re = Regex::new(r#"src:\s*'([^']+)'.*?size:\s*(\d+)"#).unwrap();
+    </code></pre>
+
+    <h3>📁 Kimeneti Fájlok</h3>
+    <ul>
+        <li><code>video_link.txt</code> – A videó URL-je.</li>
+        <li><code>response.html</code> – A lejátszó oldal teljes HTML kódja (debug célokra).</li>
+    </ul>
+</div>
+
+<script>
+    function setLanguage(language) {
+      // Hide all language sections
+      document.querySelectorAll('.language').forEach(function(element) {
+        element.style.display = 'none';
+      });
+
+      // Show the selected language
+      document.getElementById(language).style.display = 'block';
+    }
+
+    // Set the default language
+    setLanguage('en');
+  </script>
+
+</body>
+</html>
